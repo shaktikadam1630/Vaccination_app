@@ -2,7 +2,7 @@
 
 Digital child vaccination management system for parents, healthcare centres, and administrators.
 
-![VaccineTrack Portal login screen](docs/ui-login.svg)
+![VaccineTrack Portal login screen](docs/ui-login.png)
 
 ## Overview
 
