@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/client';
-import { Syringe, LogOut, Bell, MessageSquare, Check, X } from 'lucide-react';
+import { Syringe, LogOut, Bell, MessageSquare, Check, X, Sparkles } from 'lucide-react';
 
 export default function Navbar() {
     const { user, logout } = useAuth();
@@ -85,6 +85,17 @@ export default function Navbar() {
                                     }`}
                                 >
                                     Nearby Centres
+                                </Link>
+                                <Link
+                                    to="/parent/assistant"
+                                    className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${
+                                        isActive('/parent/assistant')
+                                            ? 'bg-blue-600 text-white'
+                                            : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                                    }`}
+                                >
+                                    <Sparkles className="w-3.5 h-3.5" />
+                                    AI Assistant
                                 </Link>
                             </>
                         )}

@@ -13,6 +13,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import ParentDashboard from './pages/parent/ParentDashboard';
 import DigitalVaccineCard from './pages/parent/DigitalVaccineCard';
 import NearbyCentres from './pages/parent/NearbyCentres';
+import ParentAssistant from './pages/parent/ParentAssistant';
 
 // Healthcare Centre Pages
 import CentreDashboard from './pages/centre/CentreDashboard';
@@ -40,6 +41,7 @@ export default function App() {
                         <Route path="/parent" element={<ParentDashboard />} />
                         <Route path="/parent/child/:id" element={<DigitalVaccineCard />} />
                         <Route path="/parent/nearby" element={<NearbyCentres />} />
+                        <Route path="/parent/assistant" element={<ParentAssistant />} />
                     </Route>
 
                     {/* Healthcare Centre Protected Routes */}

@@ -12,6 +12,7 @@ import {
     markNotificationsRead
 } from '../controllers/parent.controller.js';
 import { authenticateToken, authorizeRoles } from '../middleware/auth.middleware.js';
+import { askParentAssistant } from '../controllers/assistant.controller.js';
 
 const router = express.Router();
 
@@ -31,5 +32,6 @@ router.delete('/records/:id/preferred-centre', deleteParentPreferredCentre);
 
 router.get('/notifications', getNotifications);
 router.patch('/notifications/read-all', markNotificationsRead);
+router.post('/assistant', askParentAssistant);
 
 export default router;

@@ -24,7 +24,8 @@ VaccineTrack Portal brings vaccination records, due-date tracking, centre discov
 
 - **Frontend:** React 19, Vite, React Router, Tailwind CSS, Lucide React, Axios
 - **Backend:** Node.js, Express, MySQL2, JWT, bcryptjs, node-cron
-- **Integrations:** Nodemailer, SMS service hooks, optional OpenAI/LangChain integrations
+- **AI assistant:** Gemini, LangChain, and Qdrant vector search for parent support
+- **Integrations:** Nodemailer and SMS service hooks
 
 ## Project structure
 
@@ -73,11 +74,31 @@ Vite serves the web app at the local URL shown in the terminal, normally `http:/
 | Role | Routes |
 | --- | --- |
 | Public | `/login`, `/register-parent`, `/register-centre`, `/forgot-password` |
-| Parent | `/parent`, `/parent/child/:id`, `/parent/nearby` |
+| Parent | `/parent`, `/parent/child/:id`, `/parent/nearby`, `/parent/assistant` |
 | Centre | `/centre`, `/centre/inventory`, `/centre/profile` |
 | Admin | `/admin`, `/admin/rules`, `/admin/centres` |
 
 Protected routes require a valid JWT and the matching account role.
+
+## Parent AI Assistant
+
+The parent assistant is available at `/parent/assistant` and uses a hybrid architecture:
+
+1. Parent questions are authenticated with the parent JWT and scoped to `parentId`.
+2. LangChain routes personal questions to targeted MySQL queries for latest, overdue, upcoming, missed, history, schedule, centre, appointment, and inventory questions.
+3. General vaccination questions use Gemini embeddings to retrieve relevant context from Qdrant.
+4. Gemini generates the final grounded response from the retrieved context.
+
+Personal vaccination records are not sent wholesale to the AI model. Questions without available records or knowledge-base context receive an explicit unavailable response instead of invented data.
+
+Add these values to `backend/.env` to enable the assistant:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+QDRANT_URL=http://localhost:6333
+QDRANT_API_KEY=
+QDRANT_COLLECTION=vaccination_knowledge
+```
 
 ## Useful commands
 
